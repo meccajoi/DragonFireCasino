@@ -1,6 +1,6 @@
-package com.github.zipcodewilmington.casino.games.slots;
+package com.github.zipcodewilmington.casino.games.roulette;
 
-public class SlotsPlayer implements PlayerInterface {
+public class RoulettePlayer implements PlayerInterface {
     private double bet;
     private boolean isBot;
 

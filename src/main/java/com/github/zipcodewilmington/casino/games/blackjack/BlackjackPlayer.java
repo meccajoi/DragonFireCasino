@@ -1,7 +1,7 @@
-package com.github.zipcodewilmington.casino.games.slots;
+package com.github.zipcodewilmington.casino.games.blackjack;
 
-public class SlotsPlayer implements PlayerInterface {
-    private double bet;
+public class BlackjackPlayer implements PlayerInterface {
+    private Hand hand = new Hand();
     private boolean isBot;
 
     @Override
@@ -17,7 +17,7 @@ public class SlotsPlayer implements PlayerInterface {
 
     @Override
     public double getBalance() {
-        // TODO
+        // TODO — humans delegate to an internal CasinoAccount, bots use a plain field
         return 0;
     }
 
@@ -31,10 +31,21 @@ public class SlotsPlayer implements PlayerInterface {
         // TODO
     }
 
-    public void spin() {
+    public void hit() {
         // TODO
     }
 
+    public void stand() {
+        // TODO
+    }
+
+    public void doubleDown() {
+        // TODO
+    }
+
+    /**
+     * Called internally when isBot is true, instead of reading UI/console input.
+     */
     public void decideBotAction() {
         // TODO
     }

@@ -1,7 +1,7 @@
-package com.github.zipcodewilmington.casino.games.slots;
+package com.github.zipcodewilmington.casino.games.trivia;
 
-public class SlotsPlayer implements PlayerInterface {
-    private double bet;
+public class TriviaPlayer implements PlayerInterface {
+    private int score;
     private boolean isBot;
 
     @Override
@@ -31,7 +31,7 @@ public class SlotsPlayer implements PlayerInterface {
         // TODO
     }
 
-    public void spin() {
+    public void answer(String question) {
         // TODO
     }
 

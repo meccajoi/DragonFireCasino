@@ -1,7 +1,7 @@
-package com.github.zipcodewilmington.casino.games.slots;
+package com.github.zipcodewilmington.casino.games.roulette;
 
-public class SlotsGame implements GameInterface {
-    private SlotMachine machine = new SlotMachine();
+public class RouletteGame implements GameInterface {
+    private RouletteWheel wheel = new RouletteWheel();
 
     @Override
     public void setup() {
