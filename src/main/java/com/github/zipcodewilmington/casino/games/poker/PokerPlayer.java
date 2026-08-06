@@ -1,6 +1,7 @@
-package com.github.zipcodewilmington.casino.games.slots;
+package com.github.zipcodewilmington.casino.games.pokergame;
 
-public class SlotsPlayer implements PlayerInterface {
+public class PokerPlayer implements PlayerInterface {
+    private Hand hand = new Hand();
     private double bet;
     private boolean isBot;
 
@@ -31,7 +32,15 @@ public class SlotsPlayer implements PlayerInterface {
         // TODO
     }
 
-    public void spin() {
+    public void fold() {
+        // TODO
+    }
+
+    public void call() {
+        // TODO
+    }
+
+    public void raise(double amount) {
         // TODO
     }
 

@@ -2,22 +2,34 @@ package com.github.zipcodewilmington.casino;
 
 /**
  * Created by leon on 7/21/2020.
+ * All games offered by the casino must abide by GameInterface.
  */
-public interface GameInterface extends Runnable {
-    /**
-     * adds a player to the game
-     * @param player the player to be removed from the game
-     */
-    void add(PlayerInterface player);
+public interface GameInterface {
 
     /**
-     * removes a player from the game
-     * @param player the player to be removed from the game
+     * Prepares the game to be played by initializing any game-specific state
+     * (e.g. shuffling a deck, resetting a secret number) before play() is called.
      */
-    void remove(PlayerInterface player);
+    void setup();
 
     /**
-     * specifies how the game will run
+     * Runs one full round of the game.
+     * Must be implemented by every game since play logic is different for each game.
      */
-    void run();
+    void play();
+
+    /**
+     * @return a human-readable description of how this game is played
+     */
+    String getRules();
+
+    /**
+     * @return the minimum number of players required to start this game
+     */
+    int getMinPlayers();
+
+    /**
+     * @return the maximum number of players this game supports
+     */
+    int getMaxPlayers();
 }

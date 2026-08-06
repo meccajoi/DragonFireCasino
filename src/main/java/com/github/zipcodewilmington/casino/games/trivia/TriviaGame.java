@@ -1,7 +1,10 @@
-package com.github.zipcodewilmington.casino.games.slots;
+package com.github.zipcodewilmington.casino.games.triviagame;
 
-public class SlotsGame implements GameInterface {
-    private SlotMachine machine = new SlotMachine();
+import java.util.ArrayList;
+import java.util.List;
+
+public class TriviaGame implements GameInterface {
+    private List<String> questions = new ArrayList<>();
 
     @Override
     public void setup() {

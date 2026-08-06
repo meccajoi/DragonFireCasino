@@ -1,7 +1,11 @@
-package com.github.zipcodewilmington.casino.games.slots;
+package com.github.zipcodewilmington.casino.games.pokergame;
 
-public class SlotsGame implements GameInterface {
-    private SlotMachine machine = new SlotMachine();
+import java.util.ArrayList;
+import java.util.List;
+
+public class PokerGame implements GameInterface {
+    private Deck deck;
+    private List<Card> communityCards = new ArrayList<>();
 
     @Override
     public void setup() {
