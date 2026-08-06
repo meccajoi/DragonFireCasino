@@ -1,4 +1,4 @@
-package com.github.zipcodewilmington.casino.games.roulettegame;
+package com.github.zipcodewilmington.casino.games.roulette;
 
 public class RouletteGame implements GameInterface {
     private RouletteWheel wheel = new RouletteWheel();

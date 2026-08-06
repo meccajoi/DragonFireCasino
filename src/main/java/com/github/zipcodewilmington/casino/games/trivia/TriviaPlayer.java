@@ -1,4 +1,4 @@
-package com.github.zipcodewilmington.casino.games.triviagame;
+package com.github.zipcodewilmington.casino.games.trivia;
 
 public class TriviaPlayer implements PlayerInterface {
     private int score;

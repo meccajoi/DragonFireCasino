@@ -1,4 +1,4 @@
-package com.github.zipcodewilmington.casino.games.triviagame;
+package com.github.zipcodewilmington.casino.games.trivia;
 
 import java.util.ArrayList;
 import java.util.List;

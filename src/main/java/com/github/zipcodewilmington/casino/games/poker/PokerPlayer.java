@@ -1,4 +1,4 @@
-package com.github.zipcodewilmington.casino.games.pokergame;
+package com.github.zipcodewilmington.casino.games.poker;
 
 public class PokerPlayer implements PlayerInterface {
     private Hand hand = new Hand();

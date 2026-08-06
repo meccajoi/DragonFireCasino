@@ -1,4 +1,4 @@
-package com.github.zipcodewilmington.casino.games.roulettegame;
+package com.github.zipcodewilmington.casino.games.roulette;
 
 public class RoulettePlayer implements PlayerInterface {
     private double bet;
