@@ -1,29 +1,73 @@
 package com.github.zipcodewilmington.casino;
 
-import java.util.List;
+import java.util.Scanner;
 
-/**
- * numBots = 0  -> solo play against the game itself (Slots, NumberGuess, Trivia)
- * numBots > 0  -> human plays alongside bot-controlled opponents (Blackjack, Poker, Roulette)
- */
 public class Casino {
-    private List<GameInterface> games;
-    private CasinoAccountManager accountManager;
+
+    private Scanner scanner = new Scanner(System.in);
 
     public void start() {
-        // TODO
+        System.out.println("=================================");
+        System.out.println("   Welcome to DragonFire Casino!");
+        System.out.println("=================================");
+        System.out.println("Good luck and have fun!");
+        System.out.println();
+
+        playGame();
     }
 
     public void playGame() {
-        // TODO
-    }
+        boolean keepPlaying = true;
 
-    /**
-     * Constructs numBots bot-flagged instances of the matching player class
-     * for the given game and runs one round alongside the human player,
-     * respecting game.getMinPlayers()/getMaxPlayers().
-     */
-    public void playGame(GameInterface game, PlayerInterface human, int numBots) {
-        // TODO
+        while (keepPlaying) {
+            System.out.println("Choose a game:");
+            System.out.println("1. Blackjack");
+            System.out.println("2. Poker");
+            System.out.println("3. Roulette");
+            System.out.println("4. Slots");
+            System.out.println("5. Number Guess");
+            System.out.println("6. Trivia");
+            System.out.println("0. Exit");
+            System.out.print("Enter your choice: ");
+
+            String choice = scanner.nextLine();
+
+            switch (choice) {
+                case "1":
+                    System.out.println("Blackjack is coming soon.");
+                    break;
+
+                case "2":
+                    System.out.println("Poker is coming soon.");
+                    break;
+
+                case "3":
+                    System.out.println("Roulette is coming soon.");
+                    break;
+
+                case "4":
+                    System.out.println("Slots are coming soon.");
+                    break;
+
+                case "5":
+                    System.out.println("Number Guess is coming soon.");
+                    break;
+
+                case "6":
+                    System.out.println("Trivia is coming soon.");
+                    break;
+
+                case "0":
+                    keepPlaying = false;
+                    break;
+
+                default:
+                    System.out.println("Invalid choice. Enter a number from 0 to 6.");
+            }
+
+            System.out.println();
+        }
+
+        System.out.println("Thanks for visiting DragonFire Casino!");
     }
 }
