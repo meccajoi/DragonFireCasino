@@ -13,10 +13,10 @@ public class Casino {
         System.out.println("Good luck and have fun!");
         System.out.println();
 
-        playGame();
+        showMenu();
     }
 
-    public void playGame() {
+    public void showMenu() {
         boolean keepPlaying = true;
 
         while (keepPlaying) {
@@ -69,5 +69,9 @@ public class Casino {
         }
 
         System.out.println("Thanks for visiting DragonFire Casino!");
+    }
+    public void playGame(GameInterface game) {
+        game.setup();
+        game.play();
     }
 }
