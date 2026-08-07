@@ -4,7 +4,7 @@ import java.util.Random;
 
 public class SlotMachine {
     private int[] reels = new int[3];
-    private Randon random = new Random();
+    private Random random = new Random();
 
     public int[] spin() {
       

@@ -1,41 +1,52 @@
 package com.github.zipcodewilmington.casino.games.slots;
 
+import com.github.zipcodewilmington.casino.PlayerInterface;
+
 public class SlotsPlayer implements PlayerInterface {
+    private String name;
+    private double balance;
     private double bet;
     private boolean isBot;
 
+    public SlotsPlayer(String name, double balance, boolean isBot) {
+        this.name = name;
+        this.balance = balance;
+        this.isBot = isBot;
+    }
+
     @Override
     public String getName() {
-        // TODO
-        return null;
+        return name;
     }
 
     @Override
     public void placeBet(double amount) {
-        // TODO
+        bet = amount;
+        balance = balance - amount;
     }
 
     @Override
     public double getBalance() {
-        // TODO
-        return 0;
+        return balance;
     }
 
     @Override
     public void setBalance(double amount) {
-        // TODO
+        balance = amount;
     }
 
     @Override
     public void collectWinnings(double amount) {
-        // TODO
+        balance = balance + amount;
     }
 
     public void spin() {
-        // TODO
+       System.out.println(name + " spins the slot machine.");
     }
 
     public void decideBotAction() {
-        // TODO
+        if (isBot) {
+            System.out.println(name + " is deciding what to do.");
+        }
     }
 }
