@@ -6,29 +6,34 @@ package com.github.zipcodewilmington.casino;
  * on Person A's / whole team's design doc for the human/bot split rationale.
  */
 public class CasinoAccount {
-    private String owner;
+    private String name;
     private double balance;
 
-    public CasinoAccount(String owner) {
-        // TODO
+    public CasinoAccount(String name, double balance) {
+        this.name = name;
+        this.balance = balance;
+    }
+    public String getName() {
+        return name;
     }
 
     public void deposit(double amount) {
-        // TODO
+    balance = balance + amount;
     }
 
     public boolean withdraw(double amount) {
-        // TODO
+        if (canAfford(amount)) {
+        balance = balance - amount;
+        return true;
+        }
         return false;
     }
 
     public double getBalance() {
-        // TODO
-        return 0;
+        return balance;
     }
 
     public boolean canAfford(double amount) {
-        // TODO
-        return false;
+        return balance >= amount;
     }
 }
