@@ -8,29 +8,27 @@ public class TriviaGame implements GameInterface {
 
     @Override
     public void setup() {
-        // TODO
+        questions = new ArrayList<>();
     }
 
     @Override
     public void play() {
-        // TODO
+        System.out.println("Welcome to Trivia!");
+        System.out.println("Trivia is not implemented yet. Returning to menu...");
     }
 
     @Override
     public String getRules() {
-        // TODO
-        return null;
+        return "Trivia placeholder: welcome message only. Returning to menu.";
     }
 
     @Override
     public int getMinPlayers() {
-        // TODO
         return 1;
     }
 
     @Override
     public int getMaxPlayers() {
-        // TODO
         return 1;
     }
 }
