@@ -1,33 +1,37 @@
 package com.github.zipcodewilmington.casino.games.slots;
 
-public class SlotsGame implements GameInterface {
-    private SlotMachine machine = new SlotMachine();
+    import com.github.zipcodewilmington.casino.GameInterface;
+
+    public class SlotsGame implements GameInterface {
+    
+        private SlotMachine machine = new SlotMachine();
 
     @Override
     public void setup() {
-        // TODO
+        System.out.println("Welcome to Slots!");
+        System.out.println(getRules());
     }
 
     @Override
     public void play() {
-        // TODO
+      int[] reels = machine.spin();
+
+      System.out.println(reels[0] + " | " + reels[1] + " | " + reels[2]);
+      System.out.println("Payout: $" + machine.getPayout());
     }
 
     @Override
     public String getRules() {
-        // TODO
-        return null;
+        return "Match all 3 reels to win 100. Match 2 reels to win 20.";
     }
 
     @Override
     public int getMinPlayers() {
-        // TODO
         return 1;
     }
 
     @Override
     public int getMaxPlayers() {
-        // TODO
         return 1;
     }
 }

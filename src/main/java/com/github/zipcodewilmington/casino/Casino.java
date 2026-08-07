@@ -1,6 +1,7 @@
 package com.github.zipcodewilmington.casino;
 
 import java.util.Scanner;
+import com.github.zipcodewilmington.casino.games.slots.SlotsGame;
 
 public class Casino {
 
@@ -46,7 +47,7 @@ public class Casino {
                     break;
 
                 case "4":
-                    System.out.println("Slots are coming soon.");
+                    playGame(new SlotsGame());
                     break;
 
                 case "5":
