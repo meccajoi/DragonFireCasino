@@ -6,6 +6,7 @@ public class BlackjackGame implements GameInterface {
     @Override
     public void setup() {
         // TODO
+        this.setup();
     }
 
     @Override
