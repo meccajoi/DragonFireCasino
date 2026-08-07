@@ -5,29 +5,27 @@ public class NumberGuessGame implements GameInterface {
 
     @Override
     public void setup() {
-        // TODO
+        secretNumber = 0;
     }
 
     @Override
     public void play() {
-        // TODO
+        System.out.println("Welcome to Number Guess!");
+        System.out.println("Number Guess is not implemented yet. Returning to menu...");
     }
 
     @Override
     public String getRules() {
-        // TODO
-        return null;
+        return "Number Guess placeholder: welcome message only. Returning to menu.";
     }
 
     @Override
     public int getMinPlayers() {
-        // TODO
         return 1;
     }
 
     @Override
     public int getMaxPlayers() {
-        // TODO
         return 1;
     }
 }

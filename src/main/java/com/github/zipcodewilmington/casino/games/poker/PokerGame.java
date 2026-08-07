@@ -10,29 +10,28 @@ public class PokerGame implements GameInterface {
 
     @Override
     public void setup() {
-        // TODO
+        deck = new Deck();
+        communityCards = new ArrayList<>();
     }
 
     @Override
     public void play() {
-        // TODO
+        System.out.println("Welcome to Texas Hold'em!");
+        System.out.println("Poker is not implemented yet. Returning to menu...");
     }
 
     @Override
     public String getRules() {
-        // TODO
-        return null;
+        return "Poker placeholder: welcome message only. Returning to menu.";
     }
 
     @Override
     public int getMinPlayers() {
-        // TODO
-        return 1;
+        return 2;
     }
 
     @Override
     public int getMaxPlayers() {
-        // TODO
-        return 1;
+        return 10;
     }
 }
