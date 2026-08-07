@@ -19,7 +19,8 @@ public class Hand {
         return cards;
     }
 
-    public int getTotalValue() {
+    /* Belong in BlackJack
+     public int getTotalValue() {
         int total = 0;
         int numberOfAces = 0;
 
@@ -38,6 +39,8 @@ public class Hand {
 
         return total;
     }
+     */
+   
 
     public void clear() {
         cards.clear();
