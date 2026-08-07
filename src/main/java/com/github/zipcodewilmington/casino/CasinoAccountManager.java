@@ -10,12 +10,12 @@ public class CasinoAccountManager {
     private Map<String, CasinoAccount> accounts = new HashMap<>();
 
     public CasinoAccount createAccount(String name) {
-        // TODO
-        return null;
+       CasinoAccount account = new CasinoAccount(name, 0.0);
+       accounts.put(name, account);
+        return account;
     }
 
     public CasinoAccount getAccount(String name) {
-        // TODO
-        return null;
+        return  accounts.get(name);
     }
 }
