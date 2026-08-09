@@ -47,10 +47,6 @@ public class BlackjackPlayer implements PlayerInterface {
         return isBot;
     }
 
-    /**
-     * Requests one card from the given Dealer. Players never hold a
-     * reference to the deck directly — only the Dealer touches it.
-     */
     public void hit(Dealer dealer) {
         dealer.dealCardTo(this);
     }
@@ -66,10 +62,7 @@ public class BlackjackPlayer implements PlayerInterface {
         this.stand();
     }
 
-    /**
-     * Called internally when isBot is true, instead of reading console input.
-     * Kept simple per team's non-strategy-pattern bot design: hit if under 17.
-     */
+   
     public void decideBotAction(Dealer dealer) {
         if (this.getHandValue() < 17) {
             hit(dealer);
