@@ -10,9 +10,9 @@ public class CasinoAccountManager {
     private Map<String, CasinoAccount> accounts = new HashMap<>();
 
     public CasinoAccount createAccount(String name) {
-       CasinoAccount account = new CasinoAccount(name, 0.0);
+       CasinoAccount account = new CasinoAccount(name, 1000.0);
        accounts.put(name, account);
-        return account;
+       return account;
     }
 
     public CasinoAccount getAccount(String name) {

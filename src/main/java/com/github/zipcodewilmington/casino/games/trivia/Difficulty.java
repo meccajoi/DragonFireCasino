@@ -1,17 +1,24 @@
 package com.github.zipcodewilmington.casino.games.trivia;
 
-public enum Difficulty {
-    EASY(1),
-    MEDIUM(3),
-    HARD(5);
+public record Question(
+    String prompt,
+    String[] choices,
+    char correctAnswer,
+    Question.Difficulty difficulty) {
 
-    private final int reward;
+    public enum Difficulty {
+        EASY(1),
+        MEDIUM(3),
+        HARD(5);
 
-    Difficulty(int reward) {
-        this.reward = reward;
-    }
+        private final int reward;
 
-    public int getReward() {
-        return reward;
+        Difficulty(int reward) {
+            this.reward = reward;
+        }
+
+        public int getReward() {
+            return reward;
+        }
     }
 }

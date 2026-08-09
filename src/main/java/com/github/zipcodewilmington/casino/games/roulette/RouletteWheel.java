@@ -1,13 +1,11 @@
 package com.github.zipcodewilmington.casino.games.roulette;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Random;
 
 public class RouletteWheel {
-    private List<Integer> numbers = new ArrayList<>();
+    private Random random = new Random();
 
     public int spin() {
-        // TODO
-        return 0;
+        return random.nextInt(38) + 1;
     }
 }

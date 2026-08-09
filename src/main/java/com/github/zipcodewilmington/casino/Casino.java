@@ -1,17 +1,31 @@
 package com.github.zipcodewilmington.casino;
 
 import java.util.Scanner;
+
+import com.github.zipcodewilmington.casino.games.blackjack.BlackjackGame;
+import com.github.zipcodewilmington.casino.games.roulette.RouletteGame;
 import com.github.zipcodewilmington.casino.games.slots.SlotsGame;
+import com.github.zipcodewilmington.casino.games.trivia.TriviaGame;
 
 public class Casino {
 
     private Scanner scanner = new Scanner(System.in);
+    private CasinoAccountManager accountManager = new CasinoAccountManager();
+    private CasinoAccount account;
 
     public void start() {
         System.out.println("=================================");
         System.out.println("   Welcome to DragonFire Casino!");
         System.out.println("=================================");
         System.out.println("Good luck and have fun!");
+        System.out.println();
+        System.out.print("Enter your name: ");
+        String name = scanner.nextLine();
+
+        account = accountManager.createAccount(name);
+
+        System.out.println("Welcome, " + account.getName() + "!");
+        System.out.println("Your starting balance is: $" + account.getBalance());
         System.out.println();
 
         showMenu();
@@ -35,7 +49,7 @@ public class Casino {
 
             switch (choice) {
                 case "1":
-                    System.out.println("Blackjack is coming soon.");
+                    playGame(new BlackjackGame());
                     break;
 
                 case "2":
@@ -43,7 +57,7 @@ public class Casino {
                     break;
 
                 case "3":
-                    System.out.println("Roulette is coming soon.");
+                   playGame(new RouletteGame());
                     break;
 
                 case "4":
@@ -55,7 +69,7 @@ public class Casino {
                     break;
 
                 case "6":
-                    System.out.println("Trivia is coming soon.");
+                    playGame(new TriviaGame());
                     break;
 
                 case "0":
