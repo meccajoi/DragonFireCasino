@@ -1,8 +1,10 @@
 package com.github.zipcodewilmington.casino;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import com.github.zipcodewilmington.casino.games.blackjack.BlackjackGame;
+import com.github.zipcodewilmington.casino.games.blackjack.BlackjackPlayer;
 import com.github.zipcodewilmington.casino.games.roulette.RouletteGame;
 import com.github.zipcodewilmington.casino.games.slots.SlotsGame;
 import com.github.zipcodewilmington.casino.games.trivia.TriviaGame;
@@ -49,7 +51,29 @@ public class Casino {
 
             switch (choice) {
                 case "1":
-                    playGame(new BlackjackGame());
+                    BlackjackGame blackjack = new BlackjackGame();
+                    blackjack.addPlayer(new BlackjackPlayer("You", false));
+
+                    int numOfPlayers = 0;
+                    try {
+                        System.out.println("How many players do you want besides yourself?: ");
+                        numOfPlayers = scanner.nextInt();
+                        scanner.nextLine(); // consume leftover newline
+
+                    } catch (InputMismatchException e) {
+                        System.out.println("Invalid character, please try again");
+                        scanner.nextLine(); // consume the bad token so it doesn't loop forever
+                        numOfPlayers = 1;
+
+                    }
+                    
+
+                    for (int i = 0; i < numOfPlayers; i++) {
+                        blackjack.addPlayer(new BlackjackPlayer("Bot"+i, true));
+                    }
+
+                    playGame(blackjack);
+
                     break;
 
                 case "2":

@@ -15,11 +15,7 @@ public class BlackjackScorer {
         // utility class — not meant to be instantiated
     }
 
-    /**
-     * Total value of a hand under blackjack rules. Aces count as 11
-     * unless that would bust the hand, in which case they're downgraded
-     * to 1 one at a time until the total is 21 or under (or no aces remain).
-     */
+  
     public static int calculateHandValue(Hand hand) {
         int total = 0;
         int numberOfAces = 0;
@@ -39,12 +35,6 @@ public class BlackjackScorer {
         return total;
     }
 
-    /**
-     * True if the hand contains an Ace currently being counted as 11
-     * to reach its current total — i.e. the hand has "give" left in it.
-     * Independent from calculateHandValue()'s final total, since that
-     * method only reports the end result, not whether an Ace survived as 11.
-     */
     public static boolean isSoft(Hand hand) {
         int totalWithAcesLow = 0;
         boolean hasAce = false;

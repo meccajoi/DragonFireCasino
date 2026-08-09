@@ -11,6 +11,7 @@ public class Dealer {
     private Deck deck = new Deck();
 
     public void dealInitialCards(List<BlackjackPlayer> players) {
+
         for (BlackjackPlayer player : players) {
             dealCardTo(player);
             dealCardTo(player);
