@@ -132,4 +132,18 @@ public class TriviaGame implements GameInterface {
         System.out.printf("Total winnings:  $%.2f%n", player.getBalance());
         System.out.println("============================================");
     }
+        @Override
+        public String getRules() {
+        return "Answer questions. Three wrong answers ends the game.";
+        }
+
+        @Override
+        public int getMinPlayers() {
+        return 1;
+        }
+
+        @Override
+        public int getMaxPlayers() {
+        return 1;
+}
 }
