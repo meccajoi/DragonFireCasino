@@ -1,14 +1,16 @@
 package com.github.zipcodewilmington.casino.games.blackjack;
 
-import com.github.zipcodewilmington.casino.GameInterface;
-
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
+
+import com.github.zipcodewilmington.casino.GameInterface;
 
 public class BlackjackGame implements GameInterface {
     ////////Fields///////////
     private Dealer dealer = new Dealer();
     private List<BlackjackPlayer> players = new ArrayList<>();
+    private Scanner scanner = new Scanner(System.in);
     ////////Fields///////////
 
     public void addPlayer(BlackjackPlayer player) {
@@ -53,41 +55,64 @@ public class BlackjackGame implements GameInterface {
     }
 
     private void playerTurn(BlackjackPlayer player) {
-        // Player blackjack on the deal — automatic win, no turn needed.
         if (BlackjackScorer.calculateHandValue((player.getHand())) == 21) {
             System.out.println(player.getName() + " has Blackjack!");
             return;
         }
 
-        while (BlackjackScorer.calculateHandValue((player.getHand())) < 21) {
-            boolean wantsToHit = player.isBot()
-                ? BlackjackScorer.calculateHandValue((player.getHand())) < 17
-                : askHumanToHit(player);
+        System.out.println(player.getName() + "'s hand: " + player.getHand() + " (value: " + BlackjackScorer.calculateHandValue((player.getHand())) + ")" );
+//Player options
+ 
+        boolean turnOver = false;
 
-            if (!wantsToHit) {
-                player.stand();
-                break;
+            while (!turnOver && BlackjackScorer.calculateHandValue((player.getHand())) < 21) {
+            if (player.isBot()) {
+                if (BlackjackScorer.calculateHandValue((player.getHand())) < 17) {
+                    player.hit(dealer);
+                    System.out.println(player.getName() + "'s hand: " + player.getHand()
+                        + " (value: " + BlackjackScorer.calculateHandValue((player.getHand())) + ")");
+                } else {
+                    player.stand();
+                    turnOver = true;
+                }
+                continue;
             }
+    
+            System.out.println("How do you want to play? :");
+            System.out.println("1. HIT");
+            System.out.println("2. STNAD/STAY");
+            System.out.println("3. DOUBLE DOWN");
+            System.out.println("4. SPLIT");
+            System.out.print("Enter your choice: ");
 
-            player.hit(dealer);
-            System.out.println(player.getName() + "'s hand: " + player.getHand()
-                + " (value: " + BlackjackScorer.calculateHandValue((player.getHand())) + ")");
-        }
+            String choice = scanner.nextLine();
+
+            switch (choice) {
+                case "1" : player.hit(dealer);
+                System.out.println(player.getName() + "'s hand: " + player.getHand()
+                    + " (value: " + BlackjackScorer.calculateHandValue((player.getHand())) + ")");
+                break;
+                case "2" : player.stand();
+                // System.out.println(player.getName() + " stands.");
+                turnOver = true;
+                break;
+                case "3" : player.doubleDown(dealer);
+                // System.out.println(player.getName() + " doubles down.");
+                turnOver = true; // double down = exactly one card, then done
+                break;
+                // case "4" : player.split(dealer);
+                // break;
+                default: System.out.println("Invalide choice, try again.");
+            }
+        
 
         if (BlackjackScorer.calculateHandValue((player.getHand())) > 21) {
             System.out.println(player.getName() + " busts!");
         }
     }
+}
 
-    /**
-     * Placeholder for human input — wiring to actual console/UI input
-     * is Casino/MainApplication's responsibility. For now, defaults to
-     * the same threshold as bots so the loop is testable standalone.
-     */
-    private boolean askHumanToHit(BlackjackPlayer player) {
-        // TODO: replace with real input once Casino's I/O layer is wired in
-        return BlackjackScorer.calculateHandValue((player.getHand())) < 17;
-    }
+
 
     private boolean anyPlayerStillIn() {
         for (BlackjackPlayer player : players) {
@@ -97,6 +122,9 @@ public class BlackjackGame implements GameInterface {
         }
         return false;
     }
+
+
+
 
     private void dealerTurn() {
         System.out.println("Dealer's turn...");
@@ -151,6 +179,6 @@ public class BlackjackGame implements GameInterface {
 
     @Override
     public int getMaxPlayers() {
-        return 1;
+        return 7;
     }
 }

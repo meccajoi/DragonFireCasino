@@ -11,7 +11,8 @@ public class Deck {
     public Deck() {
         cards = new ArrayList<>();
         createDeck();
-    }
+        shuffle(); //added this to ease everyone's pain later
+}
 
     private void createDeck() {
         String[] suits = {
