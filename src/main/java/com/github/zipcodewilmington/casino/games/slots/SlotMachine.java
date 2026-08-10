@@ -26,6 +26,8 @@ public class SlotMachine {
             return 20;
 }
     return 0;
-
+    }
+    public int[] getReels() {
+    return reels;
     }
 }

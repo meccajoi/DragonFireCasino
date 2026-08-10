@@ -1,5 +1,4 @@
 package com.github.zipcodewilmington.casino;
-
 /**
  * Holds a persistent balance for a human player across multiple games
  * in a session. Bot players do not use this — see PlayerInterface note

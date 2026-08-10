@@ -40,8 +40,12 @@ public class RoulettePlayer implements PlayerInterface {
         balance = balance + amount;
     }
 
-    public void spin() {
-        System.out.println(name + " spins the roulette wheel.");
+    public double getBet() {
+        return bet;
+    }
+
+    public boolean isBot() {
+        return isBot;
     }
 
     public void decideBotAction() {
