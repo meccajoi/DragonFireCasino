@@ -1,6 +1,7 @@
 package com.github.zipcodewilmington.casino.games.poker;
 
 import com.github.zipcodewilmington.casino.PlayerInterface;
+import com.github.zipcodewilmington.utils.Hand;
 
 public class PokerPlayer implements PlayerInterface {
     private Hand hand = new Hand();

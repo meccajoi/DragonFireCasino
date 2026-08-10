@@ -3,6 +3,8 @@ package com.github.zipcodewilmington.casino.games.poker;
 import java.util.ArrayList;
 import java.util.List;
 import com.github.zipcodewilmington.casino.GameInterface;
+import com.github.zipcodewilmington.utils.Deck;
+import com.github.zipcodewilmington.utils.Card;
 
 public class PokerGame implements GameInterface {
     private Deck deck;

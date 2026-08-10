@@ -1,5 +1,7 @@
 package com.github.zipcodewilmington.casino.games.numberguess;
 
+import com.github.zipcodewilmington.casino.PlayerInterface;
+
 public class NumberGuessPlayer implements PlayerInterface {
     private int guesses;
     private boolean isBot;

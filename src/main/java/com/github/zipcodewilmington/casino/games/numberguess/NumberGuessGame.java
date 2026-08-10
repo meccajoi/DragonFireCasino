@@ -1,5 +1,7 @@
 package com.github.zipcodewilmington.casino.games.numberguess;
 
+import com.github.zipcodewilmington.casino.GameInterface;
+
 public class NumberGuessGame implements GameInterface {
     private int secretNumber;
 
