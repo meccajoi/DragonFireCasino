@@ -51,6 +51,10 @@ public class BlackjackPlayer implements PlayerInterface {
         dealer.dealCardTo(this);
     }
 
+    public void split(Dealer dealer) {
+        dealer.dealCardTo(this);
+    }
+
     public void stand() {
         System.out.println(name + " stands.");
     }

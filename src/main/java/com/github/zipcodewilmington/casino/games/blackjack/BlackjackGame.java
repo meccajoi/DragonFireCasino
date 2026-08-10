@@ -93,9 +93,11 @@ public class BlackjackGame implements GameInterface {
                     + " (value: " + BlackjackScorer.calculateHandValue((player.getHand())) + ")");
                 break;
                 case "2" : player.stand();
+                // System.out.println(player.getName() + " stands.");
                 turnOver = true;
                 break;
                 case "3" : player.doubleDown(dealer);
+                // System.out.println(player.getName() + " doubles down.");
                 turnOver = true; // double down = exactly one card, then done
                 break;
                 // case "4" : player.split(dealer);
@@ -108,6 +110,7 @@ public class BlackjackGame implements GameInterface {
             System.out.println(player.getName() + " busts!");
         }
     }
+}
 
 
 
@@ -176,6 +179,6 @@ public class BlackjackGame implements GameInterface {
 
     @Override
     public int getMaxPlayers() {
-        return 1;
+        return 7;
     }
 }
