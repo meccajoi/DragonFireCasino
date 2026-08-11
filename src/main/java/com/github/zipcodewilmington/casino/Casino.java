@@ -51,30 +51,48 @@ public class Casino {
 
             switch (choice) {
                 case "1":
+                boolean keepPlayingBlackjack = true;
+
+                while (keepPlayingBlackjack) {
                     BlackjackGame blackjack = new BlackjackGame();
-                    blackjack.addPlayer(new BlackjackPlayer("You", false));
+                    BlackjackPlayer humanPlayer = new BlackjackPlayer("You", account.getBalance(), false);
+                    blackjack.addPlayer(humanPlayer);
 
                     int numOfPlayers = 0;
                     try {
                         System.out.println("How many players do you want besides yourself?: ");
                         numOfPlayers = scanner.nextInt();
-                        scanner.nextLine(); // consume leftover newline
-
+                        scanner.nextLine();
                     } catch (InputMismatchException e) {
                         System.out.println("Invalid character, please try again");
-                        scanner.nextLine(); // consume the bad token so it doesn't loop forever
+                        scanner.nextLine();
                         numOfPlayers = 1;
-
                     }
-                    
 
                     for (int i = 0; i < numOfPlayers; i++) {
-                        blackjack.addPlayer(new BlackjackPlayer("Bot"+i, true));
+                        blackjack.addPlayer(new BlackjackPlayer("Bot" + i, 100.0, true));
                     }
 
                     playGame(blackjack);
 
-                    break;
+                    double finalBalance = humanPlayer.getBalance();
+                    double difference = finalBalance - account.getBalance();
+                    if (difference > 0) {
+                        account.deposit(difference);
+                        System.out.println("You won $" + difference + "! New balance: $" + account.getBalance());
+                    } else if (difference < 0) {
+                        account.withdraw(-difference);
+                        System.out.println("You lost $" + (-difference) + ". New balance: $" + account.getBalance());
+                    } else {
+                        System.out.println("You broke even. Balance: $" + account.getBalance());
+                    }
+
+                    System.out.print("Play another round of Blackjack? (y/n): ");
+                    String again = scanner.nextLine();
+                    keepPlayingBlackjack = again.equalsIgnoreCase("y");
+                }
+
+                break;
 
                 case "2":
                     System.out.println("Poker is coming soon.");

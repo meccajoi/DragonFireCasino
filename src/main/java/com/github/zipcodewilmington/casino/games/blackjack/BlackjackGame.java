@@ -1,7 +1,9 @@
 package com.github.zipcodewilmington.casino.games.blackjack;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 
 import com.github.zipcodewilmington.casino.GameInterface;
@@ -11,12 +13,15 @@ public class BlackjackGame implements GameInterface {
     private Dealer dealer = new Dealer();
     private List<BlackjackPlayer> players = new ArrayList<>();
     private Scanner scanner = new Scanner(System.in);
+    private Map<BlackjackPlayer, Double> currentBets = new HashMap<>();
+ 
     ////////Fields///////////
 
     public void addPlayer(BlackjackPlayer player) {
         players.add(player);
     }
 
+    //SETUP METHOD
     @Override
     public void setup() {
         System.out.println("Setting up Blackjack...");
@@ -26,10 +31,28 @@ public class BlackjackGame implements GameInterface {
         }
     }
 
+    
     @Override
     public void play() {
+        //Money Stuff:
         System.out.println("Welcome to Blackjack!");
         System.out.println("Your table limit is: " + getMaxPlayers());
+
+        for (BlackjackPlayer player : players) {
+            if (!player.isBot()) {
+                System.out.println(player.getName() + ", your balance is: $" + player.getBalance());
+                // System.out.println(player.getName() + ", your balance is: $" + BlackjackPlayer.getBalance());
+                System.out.print("Enter your bet: ");
+                double bet = Double.parseDouble(scanner.nextLine());
+                player.placeBet(bet);
+                currentBets.put(player, bet);
+            } else {
+                double botBet = 10.0; // flat bot bet, or randomize later
+                player.placeBet(botBet);
+                currentBets.put(player, botBet);
+            }
+        }
+        //close money stuff
 
         dealer.dealInitialCards(players);
 
@@ -52,7 +75,7 @@ public class BlackjackGame implements GameInterface {
         }
 
         resolveOutcomes();
-    }
+    }//end play()
 
     private void playerTurn(BlackjackPlayer player) {
         if (BlackjackScorer.calculateHandValue((player.getHand())) == 21) {
@@ -61,17 +84,21 @@ public class BlackjackGame implements GameInterface {
         }
 
         System.out.println(player.getName() + "'s hand: " + player.getHand() + " (value: " + BlackjackScorer.calculateHandValue((player.getHand())) + ")" );
+
+
 //Player options
- 
         boolean turnOver = false;
 
             while (!turnOver && BlackjackScorer.calculateHandValue((player.getHand())) < 21) {
             if (player.isBot()) {
+
+                //Bot's are gonna hit as long as their hand is less than 17.
                 if (BlackjackScorer.calculateHandValue((player.getHand())) < 17) {
                     player.hit(dealer);
                     System.out.println(player.getName() + "'s hand: " + player.getHand()
                         + " (value: " + BlackjackScorer.calculateHandValue((player.getHand())) + ")");
                 } else {
+                    //If the hand is over 17 then the bot will stand, aka they will stop drawing cards
                     player.stand();
                     turnOver = true;
                 }
@@ -96,10 +123,12 @@ public class BlackjackGame implements GameInterface {
                 // System.out.println(player.getName() + " stands.");
                 turnOver = true;
                 break;
-                case "3" : player.doubleDown(dealer);
-                // System.out.println(player.getName() + " doubles down.");
-                turnOver = true; // double down = exactly one card, then done
-                break;
+                case "3":
+                    double additionalBet = currentBets.get(player);
+                    player.doubleDown(dealer, additionalBet);
+                    currentBets.put(player, currentBets.get(player) * 2); // update tracked bet to reflect the double
+                    turnOver = true;// double down = exactly one card, then done
+                    break;
                 // case "4" : player.split(dealer);
                 // break;
                 default: System.out.println("Invalide choice, try again.");
@@ -112,8 +141,6 @@ public class BlackjackGame implements GameInterface {
     }
 }
 
-
-
     private boolean anyPlayerStillIn() {
         for (BlackjackPlayer player : players) {
             if (BlackjackScorer.calculateHandValue((player.getHand())) <= 21) {
@@ -123,9 +150,6 @@ public class BlackjackGame implements GameInterface {
         return false;
     }
 
-
-
-
     private void dealerTurn() {
         System.out.println("Dealer's turn...");
         while (dealer.shouldHit()) {
@@ -134,37 +158,47 @@ public class BlackjackGame implements GameInterface {
         dealer.revealHand();
     }
 
-    private void resolveDealerBlackjack() {
-        dealer.revealHand();
-        for (BlackjackPlayer player : players) {
-            if (BlackjackScorer.calculateHandValue((player.getHand())) == 21) {
-                System.out.println(player.getName() + " pushes with the dealer.");
-            } else {
-                System.out.println(player.getName() + " loses — dealer has Blackjack.");
-            }
+  private void resolveDealerBlackjack() {
+    dealer.revealHand();
+    for (BlackjackPlayer player : players) {
+        if (BlackjackScorer.calculateHandValue((player.getHand())) == 21) {
+            player.collectWinnings(currentBets.get(player));
+            System.out.println(player.getName() + " pushes with the dealer.");
+        } else {
+            System.out.println(player.getName() + " loses - dealer has Blackjack.");
         }
     }
+}
 
-    private void resolveOutcomes() {
-        int dealerValue = BlackjackScorer.calculateHandValue((dealer.getHand()));
-        boolean dealerBusted = dealerValue > 21;
 
-        for (BlackjackPlayer player : players) {
-            int playerValue = BlackjackScorer.calculateHandValue((player.getHand()));
+    ///////////review
+   private void resolveOutcomes() {
+    int dealerValue = BlackjackScorer.calculateHandValue((dealer.getHand()));
+    boolean dealerBusted = dealerValue > 21;
 
-            if (playerValue > 21) {
-                System.out.println(player.getName() + " loses — busted.");
-            } else if (dealerBusted) {
-                System.out.println(player.getName() + " wins — dealer busted.");
-            } else if (playerValue > dealerValue) {
+    for (BlackjackPlayer player : players) {
+        int playerValue = BlackjackScorer.calculateHandValue((player.getHand()));
+
+        if (playerValue > 21) {
+            System.out.println(player.getName() + " loses - busted.");
+        } else if (dealerBusted || playerValue > dealerValue) {
+            double winnings = currentBets.get(player) * 2;
+            player.collectWinnings(winnings);
+            if (dealerBusted) {
+                System.out.println(player.getName() + " wins - dealer busted.");
+            } else {
                 System.out.println(player.getName() + " wins!");
-            } else if (playerValue < dealerValue) {
-                System.out.println(player.getName() + " loses.");
-            } else {
-                System.out.println(player.getName() + " pushes.");
             }
+        } else if (playerValue < dealerValue) {
+            System.out.println(player.getName() + " loses.");
+        } else {
+            player.collectWinnings(currentBets.get(player));
+            System.out.println(player.getName() + " pushes.");
         }
     }
+}
+
+   
 
     @Override
     public String getRules() {
