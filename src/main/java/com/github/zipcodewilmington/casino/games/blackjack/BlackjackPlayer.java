@@ -9,8 +9,9 @@ public class BlackjackPlayer implements PlayerInterface {
     private String name;
     private double balance;
 
-    public BlackjackPlayer(String name, boolean isBot) {
+    public BlackjackPlayer(String name, double balance, boolean isBot) {
         this.name = name;
+        this.balance = balance;
         this.isBot = isBot;
     }
 
@@ -59,12 +60,11 @@ public class BlackjackPlayer implements PlayerInterface {
         System.out.println(name + " stands.");
     }
 
-    public void doubleDown(Dealer dealer) {
-        // TODO — double the bet, take exactly one more card, then stand
-        this.placeBet(balance);
-        dealer.dealCardTo(this);
-        this.stand();
-    }
+    public void doubleDown(Dealer dealer, double additionalBet) {
+    this.placeBet(additionalBet);
+    dealer.dealCardTo(this);
+    this.stand();
+}
 
    
     public void decideBotAction(Dealer dealer) {
