@@ -37,6 +37,11 @@ public class Casino {
         boolean keepPlaying = true;
 
         while (keepPlaying) {
+            System.out.println();
+            System.out.println("Player: " + account.getName());
+            System.out.println("Current balance: $" + account.getBalance());
+            System.out.println();
+
             System.out.println("Choose a game:");
             System.out.println("1. Blackjack");
             System.out.println("2. Poker");
@@ -99,11 +104,11 @@ public class Casino {
                     break;
 
                 case "3":
-                   playGame(new RouletteGame());
+                   playGame(new RouletteGame(account));
                     break;
 
                 case "4":
-                    playGame(new SlotsGame());
+                    playGame(new SlotsGame(account));
                     break;
 
                 case "5":
