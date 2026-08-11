@@ -95,6 +95,11 @@ public class Casino {
                     System.out.print("Play another round of Blackjack? (y/n): ");
                     String again = scanner.nextLine();
                     keepPlayingBlackjack = again.equalsIgnoreCase("y");
+
+                    if (humanPlayer.getBalance() <= 0) {
+                        System.out.println("You're out of money — heading back to the main menu.");
+                        keepPlayingBlackjack = false;
+                    }
                 }
 
                 break;

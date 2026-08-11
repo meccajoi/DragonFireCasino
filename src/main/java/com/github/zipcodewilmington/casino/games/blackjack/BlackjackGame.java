@@ -40,18 +40,35 @@ public class BlackjackGame implements GameInterface {
 
         for (BlackjackPlayer player : players) {
             if (!player.isBot()) {
+                if (player.getBalance() <= 0) {
+                    System.out.println(player.getName() + ", you're out of money and can't play this round.");
+                    return;
+                }
+
+            double bet = -1;
+            while (bet <= 0 || bet > player.getBalance()) {
                 System.out.println(player.getName() + ", your balance is: $" + player.getBalance());
-                // System.out.println(player.getName() + ", your balance is: $" + BlackjackPlayer.getBalance());
                 System.out.print("Enter your bet: ");
-                double bet = Double.parseDouble(scanner.nextLine());
+                try {
+                    bet = Double.parseDouble(scanner.nextLine());
+                    if (bet <= 0) {
+                        System.out.println("Bet must be greater than $0.");
+                    } else if (bet > player.getBalance()) {
+                        System.out.println("You can't bet more than your balance.");
+                    }
+                } catch (NumberFormatException e) {
+                    System.out.println("Invalid amount, try again.");
+                    bet = -1;
+                }
+            }
                 player.placeBet(bet);
                 currentBets.put(player, bet);
             } else {
-                double botBet = 10.0; // flat bot bet, or randomize later
+                double botBet = 10.0;
                 player.placeBet(botBet);
                 currentBets.put(player, botBet);
             }
-        }
+}
         //close money stuff
 
         dealer.dealInitialCards(players);
