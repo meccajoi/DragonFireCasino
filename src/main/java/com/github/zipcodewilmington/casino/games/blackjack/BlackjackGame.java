@@ -147,8 +147,8 @@ public class BlackjackGame implements GameInterface {
                     turnOver = true;// double down = exactly one card, then done
                     break;
                 // case "4" : player.split(dealer);
-                // break;
-                default: System.out.println("Invalide choice, try again.");
+                //break;
+                default: System.out.println("Invalid choice, try again.");
             }
         
 

@@ -5,6 +5,7 @@ import java.util.Scanner;
 
 import com.github.zipcodewilmington.casino.games.blackjack.BlackjackGame;
 import com.github.zipcodewilmington.casino.games.blackjack.BlackjackPlayer;
+import com.github.zipcodewilmington.casino.games.numberguess.NumberGuessGame;
 import com.github.zipcodewilmington.casino.games.roulette.RouletteGame;
 import com.github.zipcodewilmington.casino.games.slots.SlotsGame;
 import com.github.zipcodewilmington.casino.games.trivia.TriviaGame;
@@ -26,8 +27,8 @@ public class Casino {
 
         account = accountManager.createAccount(name);
 
-        System.out.println("Welcome, " + account.getName() + "!");
-        System.out.println("Your starting balance is: $" + account.getBalance());
+        System.out.println("👋 Welcome, " + account.getName() + "!");
+        System.out.println("Your starting balance is: $ 💰" + account.getBalance());
         System.out.println();
 
         showMenu();
@@ -43,14 +44,18 @@ public class Casino {
             System.out.println();
 
             System.out.println("Choose a game:");
-            System.out.println("1. Blackjack");
-            System.out.println("2. Poker");
-            System.out.println("3. Roulette");
-            System.out.println("4. Slots");
-            System.out.println("5. Number Guess");
-            System.out.println("6. Trivia");
-            System.out.println("0. Exit");
-            System.out.print("Enter your choice: ");
+            System.out.println("   1. 🃏 Blackjack");
+            System.out.println("   2. ♠️ Poker");
+            System.out.println("   3. 🎡 Roulette");
+            System.out.println("   4. 🎰 Slots");
+            System.out.println("   5. 🔢 Number Guess");
+            System.out.println("   6. 🧠 Trivia");
+            System.out.println();
+            System.out.println("   0. 🚪 Leave Casino");
+
+            System.out.println("----------------------------------------");
+
+            System.out.print("🔥 Feeling lucky? Choose your game: ");
 
             String choice = scanner.nextLine();
 
@@ -117,8 +122,10 @@ public class Casino {
                     break;
 
                 case "5":
-                    System.out.println("Number Guess is coming soon.");
-                    break;
+                NumberGuessGame numberGuessGame = new NumberGuessGame();
+                numberGuessGame.setup();
+                numberGuessGame.play();
+                break;
 
                 case "6":
                     playGame(new TriviaGame());
